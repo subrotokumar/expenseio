@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/transaction.dart';
-
 import 'package:intl/intl.dart';
+
+import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> _transactions;
@@ -12,7 +12,6 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 510,
       child: _transactions.isEmpty
           ? Column(
               children: <Widget>[
@@ -61,54 +60,10 @@ class TransactionList extends StatelessWidget {
                     ),
                     trailing: IconButton(
                         icon: Icon(Icons.delete),
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         onPressed: () => _deleteTx(_transactions[index].id)),
                   ),
                 );
-
-                // Card(
-                //   child: Row(
-                //     children: <Widget>[
-                //       Container(
-                //         margin: EdgeInsets.symmetric(
-                //           vertical: 10,
-                //           horizontal: 15,
-                //         ),
-                //         padding: EdgeInsets.all(10),
-                //         decoration: BoxDecoration(
-                //           border: Border.all(
-                //             color: Theme.of(context).primaryColorDark,
-                //             width: 2,
-                //           ),
-                //         ),
-                //         child: Text(
-                //           "₹ ${_transactions[index].amount.toStringAsFixed(2)}",
-                //           style: TextStyle(
-                //             fontWeight: FontWeight.bold,
-                //             color: Theme.of(context).primaryColorDark,
-                //           ),
-                //         ),
-                //       ),
-                //       Column(
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: <Widget>[
-                //           Text(
-                //             _transactions[index].title,
-                //             style: TextStyle(
-                //               fontSize: 16,
-                //               fontWeight: FontWeight.bold,
-                //             ),
-                //           ),
-                //           Text(
-                //             DateFormat.yMMMd()
-                //                 .format(_transactions[index].date),
-                //             style: TextStyle(color: Colors.grey),
-                //           ),
-                //         ],
-                //       ),
-                //     ],
-                //   ),
-                // );
               },
               itemCount: _transactions.length,
             ),
