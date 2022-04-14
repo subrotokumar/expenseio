@@ -11,6 +11,7 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selecteColor = Theme.of(context).colorScheme;
     return LayoutBuilder(builder: ((context, constraints) {
       return Container(
         child: _transactions.isEmpty
@@ -37,7 +38,7 @@ class TransactionList extends StatelessWidget {
                     child: ListTile(
                       leading: CircleAvatar(
                         radius: 30,
-                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor: selecteColor.primary,
                         child: Padding(
                           padding: EdgeInsets.all(5),
                           child: FittedBox(
@@ -57,10 +58,24 @@ class TransactionList extends StatelessWidget {
                       subtitle: Text(
                         DateFormat.yMMMd().format(_transactions[index].date),
                       ),
-                      trailing: IconButton(
-                          icon: Icon(Icons.delete),
-                          color: Theme.of(context).colorScheme.secondary,
-                          onPressed: () => _deleteTx(_transactions[index].id)),
+                      trailing: MediaQuery.of(context).size.width > 400
+                          ? TextButton.icon(
+                              onPressed: () =>
+                                  _deleteTx(_transactions[index].id),
+                              icon: Icon(Icons.delete),
+                              label: FittedBox(
+                                child: Text(
+                                  "Remove",
+                                ),
+                              ),
+                              style: TextButton.styleFrom(
+                                  primary: selecteColor.secondary),
+                            )
+                          : IconButton(
+                              icon: Icon(Icons.delete),
+                              color: selecteColor.secondary,
+                              onPressed: () =>
+                                  _deleteTx(_transactions[index].id)),
                     ),
                   );
                 },
