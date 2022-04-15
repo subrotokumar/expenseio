@@ -17,7 +17,14 @@ class TransactionList extends StatelessWidget {
         child: _transactions.isEmpty
             ? Column(
                 children: <Widget>[
-                  FittedBox(child: Text("No! Transaction Found")),
+                  FittedBox(
+                      child: Text(
+                    "No Transaction Found !",
+                    style: TextStyle(
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  )),
                   SizedBox(
                     height: 40,
                   ),
