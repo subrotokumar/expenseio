@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -59,15 +62,11 @@ class _NewTransactionState extends State<NewTransaction> {
               children: <Widget>[
                 TextField(
                   decoration: InputDecoration(labelText: 'Title'),
-                  // onChanged: (val) {
-                  //   titleInput = val;
-                  // },
                   controller: _titleController,
                   onSubmitted: (_) => _submitData(),
                 ),
                 TextField(
                   decoration: InputDecoration(labelText: 'Amount'),
-                  //onChanged: (val) => amount = val,
                   controller: _amountController,
                   keyboardType: TextInputType.number,
                   onSubmitted: (_) => _submitData(),
@@ -81,14 +80,24 @@ class _NewTransactionState extends State<NewTransaction> {
                             ? 'No Date Chosen!'
                             : "Picked Date : ${DateFormat.yMMMd().format(_selectedDate)}"),
                       ),
-                      TextButton(
-                          onPressed: () {
-                            _presentDatePicker();
-                          },
-                          child: Text(
-                            'Choose Date',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          )),
+                      Platform.isIOS
+                          ? CupertinoButton(
+                              child: Text(
+                                'Choose Date',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              onPressed: () {
+                                _presentDatePicker();
+                              },
+                            )
+                          : TextButton(
+                              onPressed: () {
+                                _presentDatePicker();
+                              },
+                              child: Text(
+                                'Choose Date',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
                     ],
                   ),
                 ),
